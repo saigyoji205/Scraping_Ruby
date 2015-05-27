@@ -8,7 +8,7 @@ require 'nokogiri'
 require 'robotex'
 
 # スクレイピング先のURL
-url = 'http://www.yahoo.co.jp/'
+url = 'http://product.rakuten.co.jp/product/SONY+Cyber-Shot+RX+DSC-RX100/3001b6cc2b32d37104be7c9d58f6755d/review/'
 robotex = Robotex.new
 
 # スクレイピング先のURLでrobots.txtの可否があるか調べる(true => なし、false => あり)
@@ -29,4 +29,12 @@ doc = Nokogiri::HTML.parse(html,nil,charset)
 
 
 # nokogiriで分解したタグの中から'title'タグを抽出
-puts doc.css('title').text
+#レビュアー
+puts doc.css('#rpsTabSectRev > div.rpsRevList.clfx > div.rpsRevListLeft > div.clfx.reviewerHeader > div.revName').text
+#レビュー日時
+puts doc.css('#rpsTabSectRev > div.rpsRevList.clfx > div.rpsRevListLeft > div.clfx.reviewerHeader > div.revDays').text
+#レビュータイトル
+puts doc.css('#rpsTabSectRev > div.rpsRevList.clfx > div.rpsRevListLeft > div.revTitle > font > b').text
+#レビュー本文
+puts doc.css('#rpsTabSectRev > div.rpsRevList.clfx > div.rpsRevListLeft > div.revTxt').text
+
